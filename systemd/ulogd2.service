@@ -1,0 +1,15 @@
+[Unit]
+Description=Netfilter Userspace Logging Daemon
+
+[Service]
+Type=forking
+PIDFile=/run/ulog/ulogd.pid
+ExecStart=/usr/sbin/ulogd --daemon --uid ulog --pidfile /run/ulog/ulogd.pid
+
+# Restart Logger on failure (db might not be available on startup!)
+Restart=always
+RestartSec=20
+
+[Install]
+Alias=ulogd.service
+WantedBy=multi-user.target
